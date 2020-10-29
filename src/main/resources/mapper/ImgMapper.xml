@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="spring.aoyo_hou.mapper.ImgMapper">
+
+
+   <!-- /*轮播图全查*/
+    List<AoyoCommodityImg> slideshow();-->
+    <select id="slideshow" resultType="AoyoCommodityImg">
+        select *  from aoyo_commodity_img
+    </select>
+
+
+</mapper>
