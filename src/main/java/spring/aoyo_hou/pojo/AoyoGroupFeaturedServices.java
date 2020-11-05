@@ -1,18 +1,22 @@
 package spring.aoyo_hou.pojo;
 
-import lombok.Data;
 
-import java.util.Date;
+import lombok.Data;
 
 @Data
 public class AoyoGroupFeaturedServices {
-  private long featuredServicesId;
+
+  private Integer featuredServicesId;
   private String functionButtonName;
   private String featuredServicesDesc;
   private String featuredServicesRemarks;
-  private long featuredServicesIsenable;
-  private long deleteFlag;
-  private Date createTime;
+  private Integer featuredServicesIsenable;
+  private Integer deleteFlag;
+  private java.sql.Timestamp createTime;
   private String functionButtonUrl;
   private String jumpPath;
+
+
+ 
+
 }

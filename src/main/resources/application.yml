@@ -3,6 +3,14 @@ spring:
     static-path-pattern: /**
     view:
       suffix: .jsp
+      prefix: /jsps/
+
+    #开启热部署
+    devtools:
+      restart:
+        enabled: true
+    resources:
+      static-locations: classpath:/META-INF/resources/,classpath:/resources/,classpath:/static/,classpath:/public/,file:${web.upload-path}
   devtools:
     restart:
       enabled: true
@@ -19,7 +27,8 @@ server:
   jsp-servlet:
     init-parameters:
       development: true
-  port: 8090
+  port: 8089
+
 
 
 mybatis:

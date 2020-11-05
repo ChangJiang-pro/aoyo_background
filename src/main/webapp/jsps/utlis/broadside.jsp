@@ -7,9 +7,9 @@
             <li class="active"><a href="/jsps/index.jsp"><i class="icon-home"></i>首页
                 <span class="submenu-icon"></span></a>
                 <ul>
-                    <li><a href="/jsps/purchaseRequest.jsp">xx</a>
+                    <li><a href="/jsps/index/indeximg.jsp">首页轮播图</a>
                     </li>
-                    <li><a href="/jsps/stockOut.jsp">xx</a>
+                    <li><a href="/jsps/index/indextype.jsp">首页功能按钮</a>
                     </li>
                     <li><a href="/jsps/abnormal.jsp">xx</a>
                     </li>
@@ -21,58 +21,25 @@
                     </li>
                 </ul>
             </li>
-           <%-- <c:if test="${USER.uRole==1||USER.uRole==2}">--%>
-                <li><a href="#"><i class="icon-question"></i>分类
-                    <span class="submenu-icon"></span></a>
-                        <%--权限1，2可查看--%>
-                    <ul>
-                        <li><a href="/jsps/purchaseRequest.jsp">xx</a>
-                        </li>
-                        <li><a href="/jsps/stockOut.jsp">xx</a>
-                        </li>
-                        <li><a href="/jsps/abnormal.jsp">xx</a>
-                        </li>
-                        <li><a href="/jsps/abnormal.jsp">xx</a>
-                        </li>
-                        <li><a href="/jsps/abnormal.jsp">xx</a>
-                        </li>
-                        <li><a href="/jsps/abnormal.jsp">xx</a>
-                        </li>
-                    </ul>
-                </li>
-        <%-- </c:if>--%>
-            <%--<c:if test="${USER.uRole==1||USER.uRole==2}">--%>
-                <li><a href="#"><i class="icon-briefcase"></i>门店
-                    <span class="submenu-icon"></span></a>
-                    <ul>
-                        <li><a href="/jsps/purchaseRequest.jsp">xx</a>
-                        </li>
-                        <li><a href="/jsps/stockOut.jsp">xx</a>
-                        </li>
-                        <li><a href="/jsps/abnormal.jsp">xx</a>
-                        </li>
-                        <li><a href="/jsps/abnormal.jsp">xx</a>
-                        </li>
-                        <li><a href="/jsps/abnormal.jsp">xx</a>
-                        </li>
-                        <li><a href="/jsps/abnormal.jsp">xx</a>
-                        </li>
-                    </ul>
-                  </li>
-            <%--</c:if>--%>
 
-
-
-
-            <%--<c:if test="${USER.uRole==1||USER.uRole==2}">--%>
-
-            <li><a href="#"><i class="icon-cogs"></i>我的
+            <li class="active"><a href="/jsps/merchant/merchantAdministrator.jsp"><i class="icon-home"></i>商户管理
                 <span class="submenu-icon"></span></a>
-                <%--权限1，2可查看--%>
                 <ul>
-                    <li><a href="/jsps/purchaseRequest.jsp">xx</a>
                     </li>
-                    <li><a href="/jsps/stockOut.jsp">xx</a>
+                    <li><a href="/jsps/merchant/merchantZhuYe.jsp">商户主页信息</a>
+                    </li>
+                    <li><a href="/jsps/merchant/merchantFuWu.jsp">特色服务</a>
+                    </li>
+                    <li><a href="/jsps/abnormal.jsp">xx</a>
+                    </li>
+                    <li><a href="/jsps/abnormal.jsp">xx</a>
+                    </li>
+                </ul>
+            </li>
+
+            <li class="active"><a href="/jsps/index.jsp"><i class="icon-home"></i>首页
+                <span class="submenu-icon"></span></a>
+                <ul>
                     </li>
                     <li><a href="/jsps/abnormal.jsp">xx</a>
                     </li>
@@ -84,25 +51,160 @@
                     </li>
                 </ul>
             </li>
-        <%--</c:if>--%>
+
+            <li class="active"><a href="/jsps/index.jsp"><i class="icon-home"></i>首页
+                <span class="submenu-icon"></span></a>
+                <ul>
+                    </li>
+                    <li><a href="/jsps/abnormal.jsp">xx</a>
+                    </li>
+                    <li><a href="/jsps/abnormal.jsp">xx</a>
+                    </li>
+                    <li><a href="/jsps/abnormal.jsp">xx</a>
+                    </li>
+                    <li><a href="/jsps/abnormal.jsp">xx</a>
+                    </li>
+                </ul>
+            </li>
+
+            <li class="active"><a href="/jsps/index.jsp"><i class="icon-home"></i>首页
+                <span class="submenu-icon"></span></a>
+                <ul>
+                    </li>
+                    <li><a href="/jsps/abnormal.jsp">xx</a>
+                    </li>
+                    <li><a href="/jsps/abnormal.jsp">xx</a>
+                    </li>
+                    <li><a href="/jsps/abnormal.jsp">xx</a>
+                    </li>
+                    <li><a href="/jsps/abnormal.jsp">xx</a>
+                    </li>
+                </ul>
+            </li>
+
+            <li class="active"><a href="/jsps/index.jsp"><i class="icon-home"></i>首页
+                <span class="submenu-icon"></span></a>
+                <ul>
+                    </li>
+                    <li><a href="/jsps/abnormal.jsp">xx</a>
+                    </li>
+                    <li><a href="/jsps/abnormal.jsp">xx</a>
+                    </li>
+                    <li><a href="/jsps/abnormal.jsp">xx</a>
+                    </li>
+                    <li><a href="/jsps/abnormal.jsp">xx</a>
+                    </li>
+                </ul>
+            </li>
+
+            <li class="active"><a href="/jsps/index.jsp"><i class="icon-home"></i>首页
+                <span class="submenu-icon"></span></a>
+                <ul>
+                    </li>
+                    <li><a href="/jsps/abnormal.jsp">xx</a>
+                    </li>
+                    <li><a href="/jsps/abnormal.jsp">xx</a>
+                    </li>
+                    <li><a href="/jsps/abnormal.jsp">xx</a>
+                    </li>
+                    <li><a href="/jsps/abnormal.jsp">xx</a>
+                    </li>
+                </ul>
+            </li>
+
+            <li class="active"><a href="/jsps/index.jsp"><i class="icon-home"></i>首页
+                <span class="submenu-icon"></span></a>
+                <ul>
+                    </li>
+                    <li><a href="/jsps/abnormal.jsp">xx</a>
+                    </li>
+                    <li><a href="/jsps/abnormal.jsp">xx</a>
+                    </li>
+                    <li><a href="/jsps/abnormal.jsp">xx</a>
+                    </li>
+                    <li><a href="/jsps/abnormal.jsp">xx</a>
+                    </li>
+                </ul>
+            </li>
 
 
 
+            <li class="active"><a href="/jsps/index.jsp"><i class="icon-home"></i>首页
+                <span class="submenu-icon"></span></a>
+                <ul>
+                    </li>
+                    <li><a href="/jsps/abnormal.jsp">xx</a>
+                    </li>
+                    <li><a href="/jsps/abnormal.jsp">xx</a>
+                    </li>
+                    <li><a href="/jsps/abnormal.jsp">xx</a>
+                    </li>
+                    <li><a href="/jsps/abnormal.jsp">xx</a>
+                    </li>
+                </ul>
+            </li>
+
+            <li class="active"><a href="/jsps/index.jsp"><i class="icon-home"></i>首页
+                <span class="submenu-icon"></span></a>
+                <ul>
+                    </li>
+                    <li><a href="/jsps/abnormal.jsp">xx</a>
+                    </li>
+                    <li><a href="/jsps/abnormal.jsp">xx</a>
+                    </li>
+                    <li><a href="/jsps/abnormal.jsp">xx</a>
+                    </li>
+                    <li><a href="/jsps/abnormal.jsp">xx</a>
+                    </li>
+                </ul>
+            </li>
+
+            <li class="active"><a href="/jsps/index.jsp"><i class="icon-home"></i>首页
+                <span class="submenu-icon"></span></a>
+                <ul>
+                    </li>
+                    <li><a href="/jsps/abnormal.jsp">xx</a>
+                    </li>
+                    <li><a href="/jsps/abnormal.jsp">xx</a>
+                    </li>
+                    <li><a href="/jsps/abnormal.jsp">xx</a>
+                    </li>
+                    <li><a href="/jsps/abnormal.jsp">xx</a>
+                    </li>
+                </ul>
+            </li>
+
+            <li class="active"><a href="/jsps/index.jsp"><i class="icon-home"></i>首页
+                <span class="submenu-icon"></span></a>
+                <ul>
+                    </li>
+                    <li><a href="/jsps/abnormal.jsp">xx</a>
+                    </li>
+                    <li><a href="/jsps/abnormal.jsp">xx</a>
+                    </li>
+                    <li><a href="/jsps/abnormal.jsp">xx</a>
+                    </li>
+                    <li><a href="/jsps/abnormal.jsp">xx</a>
+                    </li>
+                </ul>
+            </li>
+
+            <li class="active"><a href="/jsps/index.jsp"><i class="icon-home"></i>首页
+                <span class="submenu-icon"></span></a>
+                <ul>
+                    </li>
+                    <li><a href="/jsps/abnormal.jsp">xx</a>
+                    </li>
+                    <li><a href="/jsps/abnormal.jsp">xx</a>
+                    </li>
+                    <li><a href="/jsps/abnormal.jsp">xx</a>
+                    </li>
+                    <li><a href="/jsps/abnormal.jsp">xx</a>
+                    </li>
+                </ul>
+            </li>
 
 
-        <%--<c:if test="${USER.uRole==1}">
-        <li><a href="#"><i class="icon-group"></i>账号管理<span class="submenu-icon"></span></a>
-            <ul>
-                    <li><a href="/jsps/user.jsp">用户管理</a></li>
-            </ul>
-        </li>
-        </c:if>--%>
-
-        <%--<li><a href="/jsps/venderList.jsp"><i class="icon-question"
-                                              style="padding-left: 20px;width: 20px;padding-right: 35px;"></i>厂家、代理管理</a>
-        </li>--%>
-
-        </ul>
 
     </div>
 </div>

@@ -45,7 +45,6 @@
             <artifactId>jstl</artifactId>
         </dependency>
 
-        <!--pojo注解-->
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>

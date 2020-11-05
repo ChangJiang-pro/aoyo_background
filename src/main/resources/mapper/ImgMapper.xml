@@ -5,11 +5,75 @@
 <mapper namespace="spring.aoyo_hou.mapper.ImgMapper">
 
 
-   <!-- /*轮播图全查*/
-    List<AoyoCommodityImg> slideshow();-->
+    <!--
+   //
+   //前台轮播图
+   //
+   -->
+
+
+    <!-- /*轮播图全查*/
+     List<AoyoCommodityImg> slideshow();-->
     <select id="slideshow" resultType="AoyoCommodityImg">
         select *  from aoyo_commodity_img
     </select>
 
+    <!--/*删除*/
+    int shanchu(Integer id);-->
+    <delete id="shanchu">
+        delete from aoyo_commodity_img where commodity_img_id=#{commodityImgId}
+    </delete>
+
+    <!--/*回显*/
+    AoyoCommodityImg huixian(Integer commodityImgId);-->
+    <select id="huixian" resultType="AoyoCommodityImg">
+        SELECT * from aoyo_commodity_img where commodity_img_id=#{commodityImgId}
+    </select>
+
+    <!--/*修改*/
+    int Updataimage(Integer commodityId);-->
+    <update id="Updataimage"  parameterType="AoyoCommodityImg">
+        UPDATE aoyo_commodity_img SET commodity_img_desc=#{commodityImgDesc},commodity_img_lastupdate_time=curdate(),commodity_img_sort=#{commodityImgSort},commodity_img_status=#{commodityImgStatus } ,commodity_img_url=#{commodityImgUrl } WHERE commodity_img_id=#{commodityImgId}
+       </update>
+
+
+
+
+
+
+
+    <!--
+    //
+    //前台功能按钮
+    //
+    -->
+
+
+
+    <!--/*前台功能按钮全查*/
+    List<AoyoGroupFeaturedServices> slideshowtype();-->
+    <select id="slideshowtype" resultType="AoyoGroupFeaturedServices">
+        select *  from aoyo_group_featured_services
+    </select>
+
+
+    <!--/*前台功能按钮回显*/
+    AoyoGroupFeaturedServices huixiantype(Integer featuredServicesId);-->
+    <select id="huixiantype" resultType="AoyoGroupFeaturedServices">
+        SELECT * from aoyo_group_featured_services where featured_Services_id=#{featuredServicesId}
+    </select>
+
+    <!--  /*功能按钮修改*/
+    int Updataimagetype(AoyoGroupFeaturedServices type11);-->
+    <update id="Updataimagetype"  parameterType="AoyoGroupFeaturedServices">
+        UPDATE aoyo_group_featured_services SET
+          function_button_name=#{functionButtonName},
+          create_time=curdate(),
+          featured_services_desc=#{featuredServicesDesc},
+          featured_services_isenable=#{featuredServicesIsenable } ,
+          function_button_url=#{functionButtonUrl}
+          where
+          featured_services_id=#{featuredServicesId}
+          </update>
 
 </mapper>

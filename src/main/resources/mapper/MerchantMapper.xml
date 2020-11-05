@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="spring.aoyo_hou.mapper.MerchantMapper">
+
+    <!--/*商户列表全查*/
+    List<AoyoMerchant> merchantshow();-->
+    <select id="merchantshow" resultType="AoyoMerchant">
+        select *  from aoyo_merchant,sys_group
+        where aoyo_merchant.group_id=sys_group.GROUP_ID
+    </select>
+
+    <!--/*商户回显*/
+    AoyoMerchant merchantshowhuixian(Integer merchantId);-->
+
+    <select id="merchantshowhuixian" resultType="AoyoMerchant">
+        select *  from aoyo_merchant
+        left join sys_group on aoyo_merchant.GROUP_ID =  sys_group.GROUP_ID
+        WHERE merchant_id =#{id}
+
+    </select>
+
+    <!-- /*商户修改*/
+    int merchantUpdata(AoyoMerchant image);-->
+
+    <update id="merchantUpdata"  parameterType="AoyoMerchant">
+       UPDATE aoyo_merchant SET
+          merchant_name=#{merchantName},
+          merchant_type=#{merchantType},
+          merchant_address=#{merchantAddress},
+		  merchant_tel=#{merchantTel},
+          merchant_contacts=#{merchantContacts},
+		  merchant_status=#{merchantStatus}
+          where
+          merchant_id=#{merchantId}
+
+     </update>
+    <!--int merchantUpdata1(AoyoMerchant image);-->
+    <update id="merchantUpdata1"  parameterType="AoyoMerchant">
+          UPDATE sys_group SET
+          GROUP_CREATE_TIME=curdate(),
+          GROUP_LEADER=#{groupLeader},
+          GROUP_LEADER_TEL=#{groupLeaderTel},
+		  GROUP_LEGAL_PERSON_IMG_JUST=#{groupLegalPersonImgJust},
+          GROUP_LEGAL_PERSON_IMG_BACK=#{groupLegalPersonImgBack}
+          where
+          GROUP_ID=#{groupId}
+
+     </update>
+
+
+    <!--
+        商户列表
+    -->
+
+
+    <!-- /*商户主页信息*/
+    List<AoyoMerchant> merchantzhuye();-->
+    <select id="merchantzhuye" resultType="AoyoMerchant">
+        select *  from aoyo_merchant
+    </select>
+
+    <!--/*商户主页信息详情*/
+    AoyoMerchant merchantzhuyeById(Integer merchantId);-->
+    <select id="merchantzhuyeById" resultType="AoyoMerchant">
+        select *  from aoyo_merchant
+        left join sys_group on aoyo_merchant.GROUP_ID =  sys_group.GROUP_ID
+        WHERE merchant_id =#{id}
+
+    </select>
+
+    <!--/*商户主页信息详情修改*/
+    int UpdataMerchantzhuyeById(AoyoMerchant merch);-->
+    <update id="UpdataMerchantzhuyeById"  parameterType="AoyoMerchant">
+       UPDATE aoyo_merchant SET
+          merchant_describe=#{merchantDescribe},
+          merchant_img=#{merchantImg}
+          where
+          merchant_id=#{merchantId}
+
+     </update>
+
+
+
+
+    <!--
+
+        特色服务
+
+    -->
+
+
+
+
+    <!--/*特色服务列表*/
+    List<AoyoMerchant> merchantFuWu();-->
+    <select id="merchantFuWu" resultType="AoyoGroupFeaturedServices">
+        select *  from aoyo_group_featured_services
+    </select>
+
+
+    <!-- /*特色服务单查*/
+    AoyoMerchant merchantFuWuById(Integer featuredServicesId);-->
+    <select id="merchantFuWuById" resultType="AoyoGroupFeaturedServices">
+        select *  from aoyo_group_featured_services
+        where featured_services_id=#{featuredServicesId}
+    </select>
+
+
+    <!--/*特色服务修改*/
+    int merchantFuWuXiuGaiById(AoyoGroupFeaturedServices feature);-->
+    <update id="merchantFuWuXiuGaiById"  parameterType="AoyoGroupFeaturedServices">
+       UPDATE aoyo_group_featured_services SET
+          function_button_name=#{functionButtonName},
+          featured_services_desc=#{featuredServicesDesc},
+          featured_services_remarks=#{featuredServicesRemarks},
+          featured_services_isenable=#{featuredServicesIsenable}
+          where
+          featured_services_id=#{featuredServicesId}
+
+     </update>
+
+
+</mapper>

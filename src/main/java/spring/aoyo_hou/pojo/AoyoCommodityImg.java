@@ -9,16 +9,16 @@ import java.util.Date;
 @Data
 public class AoyoCommodityImg {
 
-  private long commodityImgId;
-  private long commodityId;
+  private Integer commodityImgId;
+  private Integer commodityId;
   private String commodityImgDesc;
   private String commodityImgUrl;
-  private long commodityImgIndex;
-  private long commodityImgSort;
-  private long commodityImgStatus;
+  private Integer commodityImgIndex;
+  private Integer commodityImgSort;
+  private Integer commodityImgStatus;
   @DateTimeFormat(pattern = "yyyy-MM-dd")
   @JsonFormat(pattern = "yyyy-MM-dd")
-  private Date commodityImgLastupdateTime;
+  private String commodityImgLastupdateTime;
   private long deleteFlag;
 
 

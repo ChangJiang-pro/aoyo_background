@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="spring.aoyo_hou.mapper.UserMapper">
+
+        <!-- /*登陆*/
+    SysUser login(SysUser user);-->
+    <select id="login" parameterType="SysUser" resultType="SysUser">
+        SELECT *
+        FROM sys_user
+        WHERE USER_NAME=#{userName}
+        AND USER_PWD=#{userPwd}
+    </select>
+
+</mapper>

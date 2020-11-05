@@ -3,7 +3,7 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>招生管理系统 首页</title>
+    <title> 首页</title>
     <script type="text/javascript" src="/js/jquery-3.4.1.min.js"></script>
     <script src="/bootstrap/table/bootstrap-table.js"></script>
     <script src="/bootstrap/js/bootstrap-tab.js"></script>
@@ -18,109 +18,105 @@
 
 
 
-    <script>
-        $(function () {
-            $("#tab1").bootstrapTable({
-                url: "/platformDriver/slideshow",
-                method: "get",
-                contentType: "application/x-www-form-urlencoded; charset=UTF-8",
-                pagination:true,
-                sidePagination: "client",
-                pageSize: 5,
-                columns: [
-                    {
-                        field: 'id',
-                        title: '序号',
-                        formatter: function (value, row, index) {
-                            return index + 1;
-                        }
-                    }, {
-                        field: 'commodityImgDesc',
-                        title: '图片名称'
-                    }, {
-                        field: 'commodityImgLastupdateTime',
-                        title: '创建时间'
-                    },{
-                        field: 'commodityImgSort',
-                        title: '图片排序'
-                    },{
-                        field: 'commodityImgStatus',
-                        title: '图片状态',
-                        formatter: function (value, row, index) {
-                            if (value == 1) {
-                                return "<span>开启</span>";
-                            } else if (value == 2) {
-                                return "<span class='third-item'>关闭</span>";
-                            }
-                        }
-                    },{
-                        field: 'id',
-                        title: '操作',
-                        formatter: function (value, row, index) {
-                            if(row.elAllow==1){
-                                return "<input type=\"button\" class=\"btn btn-primary\" onclick=updateenroll('"+value+"') value=\"关闭\">"
-                            }else   {
-                                return "<input type=\"button\" class=\"btn btn-primary\" onclick=updateenroll('"+value+"')  value=\"开启\">"
-                            }
 
-                        }
-                    }
-                ]
-            })
-        })
-    </script>
 
 </head>
 
 <body>
 <c:import url="utlis/background.jsp"/>
 <c:import url="utlis/broadside.jsp"/>
-
 <div style="width: 1300px; height: 800px; border:1px solid rgba(0,0,0,0.6); float: left; margin: 50px 0px 0px 60px; box-shadow: 0 0 8px black;">
-    <center><h3 style="margin-bottom: 40px">轮播图管理</h3></center>
-    <
-
-    <div class="sort_list" style="margin: 40px; margin-top: 10px; box-shadow: 0 0 4px black; height: 400px; padding: 10px;margin-top: 50px">
-        <table id="tab1"></table>
+    <center><h3 style="margin-bottom: 40px">首页</h3></center>
+    <div class="tab-pane" id="profile">
+        <div class="article">
+            <div class="item" style="float:left;margin-left: 30px">
+                <label for="businessLicenseTemp" class="btn btn-default addImg ">
+                    <img src="<%=session.getAttribute("img") %>" width="100px" height="100px">
+                </label>
+                <input style="display: none" id="businessLicenseTemp" onchange="fileimg(this)" type="file" name="businessLicenseTemp" class="preview"/>
+            </div>
+        </div>
     </div>
+    <div style="margin-right: 500px">
+            <span style="font-size: 40px">您好，欢迎<%=session.getAttribute("name") %></span><br>
+            <span style="font-size: 20px">用户权限：<%=session.getAttribute("username") %></span>
+    </div>
+    <div style="margin-top: 80px">
+        <img src="https://wscdevil.oss-cn-beijing.aliyuncs.com/devil/image/410e2c1da7a36f3816f549a17ca7d100.jpg" width="1100px" height="500px">
+    </div>
+
+
 </div>
+
+
+
+
+
 </body>
 
 </html>
-
 <script>
-
-    /*刷新页面*/
-    function shuaXin() {
-        $('#tab1').bootstrapTable('refresh');
-    }
-
-
-
-
-
-    /* 是否允许招生*/
-    function updateenroll(id) {
-        var msg = "您真的确定要更改吗吗？\n\n请确认！";
-        if (confirm(msg)==true){
-            return updateenroll22(id);
-        }else{
+    //图片回显
+    var filemaxsize = 1024 * 1;//接受的文件最大10M
+    function fileimg(file) {
+        // 获取文件后缀名
+        var size = file.files[0].size / 1024;
+        if (size>filemaxsize){
+            alert(size)
+            alert("附件大小不能大于" + filemaxsize / 1024 + "M！");
             return false;
         }
-    }
-    function updateenroll22(id) {
-        $.ajax({
-            type:"post",
-            dataType:"json",
-            url:"${pageContext.request.contextPath}/wZcenroll/updatewZcenroll2",
-            data:{"id":id},
-            success:function () {
-                alert("更改成功")
-                shuaXin();
-            },
-            error: function () {
-                alert("失败了");
+        var ext=file.value.substring(file.value.lastIndexOf(".")+1).toLowerCase()
+        // gif在IE浏览器暂时无法显示
+        if(ext!='png'&&ext!='jpg'&&ext!='jpeg'){
+            if (ext != '') {
+                alert("图片的格式必须为png或者jpg或者jpeg格式！");
             }
-        })
+            return;
+        }
+        $(file).next(".delimg").css("display","inline-block");
+        var addImg= $(file).prevAll(".addImg").children("img")
+        $(file).addClass("file")
+        var reader= new FileReader()
+        function getObjectURL(file)
+        {
+            var url = "";
+            if(window.createObjectURL!=undefined)
+            {
+                url = window.createObjectURL(file);
+            }
+            else if(window.URL!=undefined)
+            {
+                url = window.URL.createObjectURL(file);
+            }
+            else if (window.webkitURL != undefined)
+            {
+                url = window.webkitURL.createObjectURL(file);
+            }
+            return url;
+        }
+        var files=file.files[0];//获取文件信息
+        // var lujing = getObjectURL(files)
+        reader.readAsDataURL(files);
+        reader.onload = function(){
+            //读取完成后，将结果赋值给img的src
+            // imge.src=this.result
+            // alert(lujing)
+            $(addImg).attr("src",this.result)
+        }
+    }
+    var clickImg = function(obj){
+        $(obj).parent().find('.upload_input').click();
+    }
+    //H5渲染
+    function html5Reader(file,pic,addImg,deleteImg){
+        var file = file.files[0];
+        var reader = new FileReader();
+        reader.readAsDataURL(file);
+        reader.onload = function(e){
+            pic.attr("src",this.result);
+        }
     }
 </script>
+
+
