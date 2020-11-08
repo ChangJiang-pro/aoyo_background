@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="spring.aoyo_hou.mapper.AoyoCommodityCommentMapper">
+
+
+    <!--商品评论-->
+   <select id="findAll" resultType="spring.aoyo_hou.pojo.AoyoCommodityComment">
+SELECT aoyo_commodity.commodity_id,aoyo_group_user.group_user_name,aoyo_commodity.commodity_name,aoyo_order.order_code,aoyo_commodity_comment.commodity_comment_title,aoyo_commodity_comment.commodity_comment_content,aoyo_commodity_comment.commodity_comment_time,aoyo_commodity_comment.commodity_comment_time,aoyo_commodity_comment.commodity_comment_lastupdate_time,aoyo_commodity_comment.commodity_comment_remarks
+from aoyo_commodity
+LEFT JOIN aoyo_group_user on aoyo_group_user.group_id=aoyo_commodity.group_id
+LEFT JOIN aoyo_order on aoyo_order.commodity_id=aoyo_commodity.commodity_id
+LEFT JOIN aoyo_commodity_comment on aoyo_commodity_comment.commodity_id=aoyo_commodity.commodity_id
+   </select>
+
+
+
+
+</mapper>
