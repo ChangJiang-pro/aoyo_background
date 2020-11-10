@@ -8,13 +8,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
-import spring.aoyo_hou.pojo.AoyoCommodityImg;
-import spring.aoyo_hou.pojo.AoyoGroupFeaturedServices;
+import spring.aoyo_hou.pojo.*;
+import spring.aoyo_hou.response.BaseResponse;
 import spring.aoyo_hou.service.ImgService;
 import spring.aoyo_hou.utils.AliyunOSSUtil;
 
 import java.io.File;
 import java.io.IOException;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -123,6 +124,81 @@ public class ImgController {
         System.out.println(type11.getFunctionButtonUrl());
         System.out.println(type11);
         int i = imgService.Updataimagetype(type11);
+        return 1;
+    }
+
+
+    /*
+    *
+    * APP分类列表
+    *
+    * */
+
+    /*展示APP分类列表*/
+    @RequestMapping("appFenLei")
+    @ResponseBody
+    public List<AoyoAppClass> appFenLei() {
+        List<AoyoAppClass> list = imgService.appFenLei();
+        return list;
+    }
+
+    /*展示APP分类修改*/
+    @RequestMapping("appFenLeibyId")
+    @ResponseBody
+    public BaseResponse appFenLeibyId(AoyoAppClass appClass, HttpServletRequest request)  {
+        int i  = imgService.appFenLeibyId(appClass);
+        System.out.println(appClass);
+        return new BaseResponse(200,"success0",appClass) ;
+    }
+
+
+
+    /*展示APP商品品牌*/
+    @RequestMapping("appBrand")
+    @ResponseBody
+    public List<AoyoCommodityBrand> appBrand() {
+        List<AoyoCommodityBrand> list = imgService.appBrand();
+        System.out.println(list);
+        return list;
+    }
+
+
+    /*APP商品品牌修改*/
+    @RequestMapping("appBrandbyId")
+    @ResponseBody
+    public BaseResponse appBrandbyId(AoyoCommodityBrand commodityBrand, HttpServletRequest request)  {
+        int i  = imgService.appBrandbyId(commodityBrand);
+        return new BaseResponse(200,"success0",commodityBrand) ;
+    }
+
+    /*APP商品功能模块*/
+    @RequestMapping("appcommodity")
+    @ResponseBody
+    public List<AoyoAppClass> appcommodity(){
+        List<AoyoAppClass> list = imgService.appcommodity();
+        System.out.println(list);
+        return list;
+    }
+
+
+    /*APP商品功能模块修改*/
+    @RequestMapping("/UpdataAppCommodity")
+    @ResponseBody
+    public int UpdataAppCommodity(AoyoAppClass appClass,MultipartFile businessLicenseTemp, HttpServletRequest request) throws IOException {
+        System.out.println(appClass);
+        String imagename = businessLicenseTemp.getOriginalFilename();
+        SimpleDateFormat format = new SimpleDateFormat("yyyyMMddHHmmss");
+        String str = format.format(new Date());
+        File filename = new File(str+imagename);
+        //转multipart为file
+        FileUtils.copyInputStreamToFile(businessLicenseTemp.getInputStream(),filename);
+        String imageurl= AliyunOSSUtil.upload(filename);
+
+        //修改信息
+        appClass.setAppClassIcon("https://wscdevil.oss-cn-beijing.aliyuncs.com/"+imageurl);
+        System.out.println(appClass.getAppClassIcon());
+        System.out.println(appClass);
+        int i = imgService.UpdataAppCommodity(appClass);
         return 1;
     }
 

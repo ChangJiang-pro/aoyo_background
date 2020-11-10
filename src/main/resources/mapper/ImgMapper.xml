@@ -76,4 +76,69 @@
           featured_services_id=#{featuredServicesId}
           </update>
 
+
+
+
+    <!--
+
+    app分类列表
+
+    -->
+
+
+    <!--/*app分类列表展示*/
+    List<AoyoAppClass> appFenLei();-->
+    <select id="appFenLei" resultType="AoyoAppClass">
+        select *  from aoyo_app_class
+    </select>
+
+    <!--/*app分类列表修改*/
+    int appFenLeibyId(AoyoAppClass appClass);-->
+    <update id="appFenLeibyId" parameterType="AoyoAppClass">
+       UPDATE aoyo_app_class SET
+          app_class_name=#{appClassName},
+          app_class_status=#{appClassStatus},
+          app_Describe=#{appDescribe},
+		  create_time=curdate()
+          where
+          app_class_id=#{appClassId}
+    </update>
+
+    <!--/*app商品品牌展示*/
+    List<AoyoCommodityBrand> appBrand();-->
+    <select id="appBrand" resultType="AoyoCommodityBrand">
+        select *  from aoyo_commodity_brand
+    </select>
+
+
+    <!--/*app商品品牌修改*/
+    int appBrandbyId(AoyoCommodityBrand commodityBrand);-->
+    <update id="appBrandbyId" parameterType="AoyoCommodityBrand">
+       UPDATE aoyo_commodity_brand SET
+          commodity_brand_name=#{commodityBrandName},
+          commodity_brand_desc=#{commodityBrandDesc},
+		  commodity_brand_status=#{commodityBrandStatus},
+		  end_update_time=now()
+          where
+          commodity_brand_id=#{commodityBrandId}
+    </update>
+
+
+    <!--/*app商品功能模块*/
+    List<AoyoAppClass> appcommodity();-->
+    <select id="appcommodity" resultType="AoyoAppClass">
+       select *  from aoyo_app_class
+    </select>
+
+    <!--/*app商品功能模块修改*/
+    int UpdataAppCommodity(AoyoAppClass appClass);-->
+    <update id="UpdataAppCommodity" parameterType="AoyoAppClass">
+       UPDATE aoyo_app_class SET
+          app_class_name=#{appClassName},
+          app_sort=#{appSort},
+		  app_class_icon=#{appClassIcon}
+          where
+          app_class_id=#{appClassId}
+    </update>
+
 </mapper>

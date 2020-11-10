@@ -26,4 +26,8 @@ public interface MerchantService {
     AoyoGroupFeaturedServices merchantFuWuById(Integer featuredServicesId);
 
     int merchantFuWuXiuGaiById(AoyoGroupFeaturedServices feature);
+
+    List<AoyoGroupFeaturedServices> merchantTaoCan();
+
+    int merchantTaoCanbyId(AoyoGroupFeaturedServices featuredServices);
 }

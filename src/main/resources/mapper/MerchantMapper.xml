@@ -118,8 +118,31 @@
           featured_services_isenable=#{featuredServicesIsenable}
           where
           featured_services_id=#{featuredServicesId}
-
      </update>
 
+
+<!--
+
+    套餐类型
+
+    -->
+
+    <!-- /*服务类型*/
+    List<AoyoMerchant> merchantTaoCan();-->
+    <select id="merchantTaoCan" resultType="AoyoGroupFeaturedServices">
+        select *  from aoyo_group_featured_services
+    </select>
+
+    <!--/*服务类型修改*/
+    AoyoGroupFeaturedServices merchantTaoCanbyId(Integer featuredServicesId);-->
+    <update id="merchantTaoCanbyId" parameterType="AoyoGroupFeaturedServices">
+       UPDATE aoyo_group_featured_services SET
+          function_button_name=#{functionButtonName},
+          package_type=#{packageType},
+          featured_services_isenable=#{featuredServicesIsenable},
+		  create_time=curdate()
+          where
+          featured_services_id=#{featuredServicesId}
+    </update>
 
 </mapper>

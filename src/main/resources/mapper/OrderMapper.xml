@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="spring.aoyo_hou.mapper.OrderMapper">
+
+    <!--
+
+        商品管理
+
+    -->
+
+    <!--/*商品列表展示*/
+    List<dingDanJiHe> orderShow();-->
+    <select id="orderShow" resultType="dingDanJiHe">
+        select * from aoyo_order as der
+        LEFT JOIN aoyo_commodity as com on der.commodity_id=com.commodity_id
+        LEFT JOIN aoyo_custom as cus on der.custom_id=cus.custom_id
+        LEFT JOIN sys_group as gro on der.GROUP_ID=gro.GROUP_ID
+        LEFT JOIN aoyo_address as ads on der.address_id=ads.address_id
+    </select>
+
+    <!--/*商品修改*/
+    int orderShowbyId(dingDanJiHe ding);-->
+    <update id="orderShowbyId" parameterType="dingDanJiHe">
+        UPDATE aoyo_order SET
+            order_code=#{orderCode},
+            order_amount=#{orderAmount},
+		    discount_amount=#{discountAmount},
+            order_practical_amount=#{orderPracticalAmount},
+            order_input_time =now(),
+            order_settlement_time=now(),
+            pay_channel=#{payChannel},
+            group_enjoy=#{groupEnjoy},
+            invoice_state=#{invoiceState}
+        where
+          order_id=#{orderId};
+
+        UPDATE aoyo_custom SET
+            name=#{name},
+            nickname=#{nickname},
+		    mobile=#{mobile}
+        where
+		    custom_id=#{customId};
+
+		UPDATE sys_group SET
+            GROUP_TEL=#{groupTel},
+            GROUP_NAME=#{groupName},
+			GROUP_TYPE=#{groupType}
+        where
+			GROUP_ID=#{groupId};
+		UPDATE aoyo_address SET
+            address_details=#{addressDetails}
+        where
+			address_id=#{addressId}
+
+    </update>
+
+
+    <!--/*订单服务展示*/
+    List<makeAnAppointment> makeAnAppointmentShow();-->
+    <select id="makeAnAppointmentShow" resultType="makeAnAppointment">
+        select * from aoyo_custom_appointment as der
+        LEFT JOIN aoyo_group_appointment_rules as com on der.custom_appointment_id=appointment_rules_id
+        LEFT JOIN aoyo_group_appointment_type as cus on der.appointment_type_id=cus.appointment_type_id
+        LEFT JOIN sys_group as gro on der.GROUP_ID=gro.GROUP_ID
+        LEFT JOIN sys_user as ads on der.user_id=ads.user_id
+    </select>
+
+    <!--/*预约订单修改*/
+    int makeAnAppointmentUodate(makeAnAppointment yuyue);-->
+    <update id="makeAnAppointmentUodate" parameterType="makeAnAppointment">
+          UPDATE aoyo_custom_appointment
+        SET custom_name=#{customName},custom_tel=#{customTel}
+        where custom_appointment_id=#{customAppointmentId};
+
+        UPDATE sys_user
+        SET USER_NAME=#{userName}
+        where USER_ID=#{userId};
+
+        UPDATE sys_group
+        SET GROUP_TYPE=#{groupType},GROUP_NAME=#{groupName}
+        where GROUP_ID=#{groupId};
+
+        UPDATE aoyo_group_appointment_rules
+        SET subscribe_name=#{subscribeName}
+        where subscribe_id=#{subscribeId};
+
+        UPDATE aoyo_group_appointment_type
+        SET appointment_type_name=#{appointmentTypeName}
+        where appointment_type_id=#{appointmentTypeId};
+
+    </update>
+
+</mapper>

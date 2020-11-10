@@ -2,8 +2,7 @@ package spring.aoyo_hou.service.impl;
 
 import org.springframework.stereotype.Service;
 import spring.aoyo_hou.mapper.ImgMapper;
-import spring.aoyo_hou.pojo.AoyoCommodityImg;
-import spring.aoyo_hou.pojo.AoyoGroupFeaturedServices;
+import spring.aoyo_hou.pojo.*;
 import spring.aoyo_hou.service.ImgService;
 
 import javax.annotation.Resource;
@@ -56,5 +55,47 @@ public class  ImgServiceImpl implements ImgService {
     @Override
     public int Updataimagetype(AoyoGroupFeaturedServices type11) {
         return imgMapper.Updataimagetype(type11);
+    }
+
+
+
+
+
+    /*
+    *
+    * app分类列表
+    *
+    * */
+
+
+
+    @Override
+    public List<AoyoAppClass> appFenLei() {
+        return imgMapper.appFenLei();
+    }
+
+    @Override
+    public int appFenLeibyId(AoyoAppClass appClass) {
+        return imgMapper.appFenLeibyId(appClass);
+    }
+
+    @Override
+    public List<AoyoCommodityBrand> appBrand() {
+        return imgMapper.appBrand();
+    }
+
+    @Override
+    public int appBrandbyId(AoyoCommodityBrand commodityBrand) {
+        return imgMapper.appBrandbyId(commodityBrand);
+    }
+
+    @Override
+    public List<AoyoAppClass> appcommodity() {
+        return imgMapper.appcommodity();
+    }
+
+    @Override
+    public int UpdataAppCommodity(AoyoAppClass appClass) {
+         return imgMapper.UpdataAppCommodity(appClass);
     }
 }

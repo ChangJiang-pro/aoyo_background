@@ -6,13 +6,13 @@ import lombok.Data;
 @Data
 public class SysGroup {
 
-  private long groupId;
-  private long groupParentId;
-  private long groupType;
-  private long groupLevel;
-  private long groupCreatorGroupId;
-  private long countyId;
-  private long groupStatus;
+  private Integer groupId;
+  private Integer groupParentId;
+  private Integer groupType;
+  private Integer groupLevel;
+  private Integer groupCreatorGroupId;
+  private Integer countyId;
+  private Integer groupStatus;
   private String groupName;
   private String groupDesc;
   private String groupCreator;
@@ -22,27 +22,27 @@ public class SysGroup {
   private String groupLeader;
   private String groupLeaderTel;
   private String groupAddress;
-  private String groupLongitude;
+  private String groupIntegeritude;
   private String groupLatitude;
   private String groupCodeImage;
-  private long groupCode;
+  private Integer groupCode;
   private String groupBank;
   private String groupBankAccount;
   private String groupLeaderAccount;
   private String groupIcon;
-  private long groupSaleId;
+  private Integer groupSaleId;
   private String groupImg;
-  private long cardId;
-  private long loginFlag;
-  private long showFlag;
-  private long etcFlag;
-  private long deleteFlag;
+  private Integer cardId;
+  private Integer loginFlag;
+  private Integer showFlag;
+  private Integer etcFlag;
+  private Integer deleteFlag;
   private String groupEncode;
   private String groupAlias;
-  private long parentPayStatus;
+  private Integer parentPayStatus;
   private java.sql.Timestamp deleteTime;
   private String deleteDesc;
-  private long deleteUserId;
+  private Integer deleteUserId;
   private String deleteUserName;
   private String groupRoadName;
   private String groupCodeNum;
@@ -50,7 +50,7 @@ public class SysGroup {
   private String groupLegalPersonImgBack;
   private String certificatesImgurlOne;
   private String certificatesImgurlTwo;
-  private long certificatesStatus;
+  private Integer certificatesStatus;
   private double groupIncomeRatio;
-  private long groupAddressId;
+  private Integer groupAddressId;
 }

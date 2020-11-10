@@ -1,8 +1,7 @@
 package spring.aoyo_hou.mapper;
 
 
-import spring.aoyo_hou.pojo.AoyoCommodityImg;
-import spring.aoyo_hou.pojo.AoyoGroupFeaturedServices;
+import spring.aoyo_hou.pojo.*;
 
 import java.util.List;
 
@@ -33,4 +32,34 @@ public interface ImgMapper {
 
     /*功能按钮修改*/
     int Updataimagetype(AoyoGroupFeaturedServices type11);
+
+
+
+
+
+
+    /*
+    *
+    * app分类列表
+    *
+    * */
+
+    /*app分类列表展示*/
+    List<AoyoAppClass> appFenLei();
+
+    /*app分类列表修改*/
+    int appFenLeibyId(AoyoAppClass appClass);
+
+    /*app商品品牌展示*/
+    List<AoyoCommodityBrand> appBrand();
+
+    /*app商品品牌修改*/
+    int appBrandbyId(AoyoCommodityBrand commodityBrand);
+
+    /*app商品功能模块*/
+    List<AoyoAppClass> appcommodity();
+
+    /*app商品功能模块修改*/
+    int UpdataAppCommodity(AoyoAppClass appClass);
+
 }

@@ -37,4 +37,11 @@ public interface MerchantMapper {
 
     /*特色服务修改*/
     int merchantFuWuXiuGaiById(AoyoGroupFeaturedServices feature);
+
+
+    /*服务类型*/
+    List<AoyoGroupFeaturedServices> merchantTaoCan();
+
+    /*服务类型单查*/
+    int merchantTaoCanbyId(AoyoGroupFeaturedServices featuredServices);
 }

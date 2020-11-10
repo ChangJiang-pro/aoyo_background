@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <title>app商品功能模块</title>
+    <link rel="stylesheet" href="/layui/css/layui.css" media="all">
+</head>
+<body>
+<table id="coupon_tab" lay-filter="test"></table>
+<!--模态框-->
+<div style="display:none" id="update">
+    <form id="coupon_form" class="layui-form" action="" lay-filter="coupon_form">
+
+        <div class="layui-input-inline">
+            <input type="hidden" id="appClassId" name="appClassId" >
+        </div>
+
+
+       <!-- <div class="tab-pane" id="profile">
+            <div class="article">
+                <div class="item" style="float:left;margin-left: 30px">
+                    <label for="businessLicenseTemp" class="btn btn-default addImg ">
+                        <img src="${TYPE.functionButtonUrl}" width="200px" height="200px">
+                    </label>
+                    <input style="display: none" id="businessLicenseTemp" onchange="fileimg(this)" type="file" name="businessLicenseTemp" class="preview"/>
+                </div>
+            </div>
+        </div>-->
+
+
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label class="layui-form-label">图片：</label>
+                <div class="layui-input-inline">
+                    <label for="businessLicenseTemp" class="btn btn-default addImg ">
+                        <img  width="200px" height="200px" id="imgId">
+                    </label>
+                    <input style="display: none" id="businessLicenseTemp" onchange="fileimg(this)" type="file" name="businessLicenseTemp" class="preview"/>
+                </div>
+            </div>
+
+
+
+
+        </div>
+
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label class="layui-form-label">品牌名称：</label>
+                <div class="layui-input-inline">
+                    <input type="tel" id="appClassName" name="appClassName" lay-verify="title" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+
+
+            <div class="layui-inline">
+                <label class="layui-form-label">序号：</label>
+
+                <div class="layui-input-inline">
+                    <input type="text" id="appSort" name="appSort" lay-verify="title" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <div class="layui-input-block" id="yichang">
+                <button type="button" class="layui-btn layui-btn-primary">取消</button>
+                <button type="button" class="layui-btn" id="btn"  lay-submit="" lay-filter="demo1">确定</button>
+            </div>
+        </div>
+    </form>
+</div>
+<!--模态框结束-->
+<script type="text/html" id="operation">
+    <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="detail">查看</a>
+    <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+</script>
+
+
+<script src="/layui/layui.js"></script>
+<script src="/js/jquery-3.4.1.min.js"></script>
+<script>
+    // 关闭弹出框
+    function closeModel(){
+        layer.closeAll();
+    }
+    layui.use(['table','form','laydate'], function(){
+        var table = layui.table;
+        var form=layui.form;
+        var laydate=layui.laydate;
+        //日期
+        /*laydate.render({
+            elem: '#couponStartTime'
+            ,format: 'yyyy-MM-dd'
+            ,trigger: 'click'
+        });*/
+        //加载表格
+        table.render({
+            elem: '#coupon_tab'
+            ,height: 312
+            ,id: 'coupon_id'
+            ,url: '/platformDriver/appcommodity' //数据接口
+            ,page: true //开启分页
+            ,parseData : function (res) {
+                return{
+                    "code":0,
+                    "msg":"",
+                    count:100,
+                    data:res,
+                }
+            }
+            ,cols: [[ //表头
+                {field: 'appClassId', title: '序号', width:80, fixed: 'left',sort:true}
+                ,{field: 'appClassName', title: '商品功能模块', width:140}
+
+                ,{field: 'appClassIcon', title: '图片', width:140}
+                ,{field: 'createTime', title: '创建时间', width:140}//sort:true
+                ,{field: 'appSort', title: '排序', width:140}//sort:true
+                ,{title: '操作', width: 200 ,toolbar: '#operation'}
+            ]]
+
+        });
+        var url;
+        // 操作表
+        table.on('tool(test)', function(obj){ //注：tool 是工具条事件名，test 是 table 原始容器的属性 lay-filter="对应的值"
+            var data = obj.data; //获得当前行数据
+            var layEvent = obj.event; //获得 lay-event 对应的值（也可以是表头的 event 参数对应的值）
+            var tr = obj.tr; //获得当前行 tr 的 DOM 对象（如果有的话）
+            if(layEvent === 'detail'){ //查看
+                layer.open({
+                    type: 1,
+                    area: ['800px', '600px'],
+                    shadeClose: true, //点击遮罩关闭
+                    content: $("#update"),
+                    success:function () {
+                        form.val("coupon_form",data);
+                        $("#imgId").attr('src',data.appClassIcon);
+                        $("#coupon_form input").attr("style","border:none");
+                        $("#btn_div").hide();
+                        $("#yichang").hide();
+                    }
+                });
+            } else if(layEvent === 'del'){ //删除
+                layer.confirm('真的删除行么', function(index){
+                    obj.del(); //删除对应行（tr）的DOM结构，并更新缓存
+                    layer.close(index);
+                    //向服务端发送删除指令
+                    var id=data.couponId;
+                    $.ajax({
+                        url:"/market/delCoupon",
+                        data:{id:id},
+                        type:"post",
+                        dataType:"json",
+                        success:function(data){
+                            location.reload();
+                        }
+                    })
+                });
+            } else if(layEvent === 'edit'){ //编辑
+                $("#yichang").show();
+                // 弹出
+                layer.open({
+                    type: 1,
+                    area: ['800px', '600px'],
+                    closeBtn: 0, //不显示关闭按钮
+                    shadeClose: true, //点击遮罩关闭
+                    content: $("#update"),
+                    success:function () {
+                        form.val("coupon_form",data);
+                        $("#imgId").attr('src',data.appClassIcon);
+                    }
+                });
+            }
+            $("#btn").click(function() {
+                var formData = new FormData($("#coupon_form")[0]);
+                $.ajax({
+                    url: "/platformDriver/UpdataAppCommodity",
+                    data: formData,
+                    type: "POST",
+                    processData: false,
+                    contentType: false,
+                    success: function (data) {
+                        alert("修改成功");
+                        window.location.reload();
+
+                    }, error: function () {
+                        alert("修改失败");
+                    }
+                })
+            })
+        });
+    });
+</script>
+</body>
+</html>
+<script>
+    //图片回显
+    var filemaxsize = 1024 * 1;//接受的文件最大10M
+    function fileimg(file) {
+        // 获取文件后缀名
+        var size = file.files[0].size / 1024;
+        if (size>filemaxsize){
+            alert(size)
+            alert("附件大小不能大于" + filemaxsize / 1024 + "M！");
+            return false;
+        }
+        var ext=file.value.substring(file.value.lastIndexOf(".")+1).toLowerCase()
+        // gif在IE浏览器暂时无法显示
+        if(ext!='png'&&ext!='jpg'&&ext!='jpeg'){
+            if (ext != '') {
+                alert("图片的格式必须为png或者jpg或者jpeg格式！");
+            }
+            return;
+        }
+        $(file).next(".delimg").css("display","inline-block");
+        var addImg= $(file).prevAll(".addImg").children("img")
+        $(file).addClass("file")
+        var reader= new FileReader()
+        function getObjectURL(file)
+        {
+            var url = "";
+            if(window.createObjectURL!=undefined)
+            {
+                url = window.createObjectURL(file);
+            }
+            else if(window.URL!=undefined)
+            {
+                url = window.URL.createObjectURL(file);
+            }
+            else if (window.webkitURL != undefined)
+            {
+                url = window.webkitURL.createObjectURL(file);
+            }
+            return url;
+        }
+        var files=file.files[0];//获取文件信息
+        // var lujing = getObjectURL(files)
+        reader.readAsDataURL(files);
+        reader.onload = function(){
+            //读取完成后，将结果赋值给img的src
+            // imge.src=this.result
+            // alert(lujing)
+            $(addImg).attr("src",this.result)
+        }
+    }
+    var clickImg = function(obj){
+        $(obj).parent().find('.upload_input').click();
+    }
+    //H5渲染
+    function html5Reader(file,pic,addImg,deleteImg){
+        var file = file.files[0];
+        var reader = new FileReader();
+        reader.readAsDataURL(file);
+        reader.onload = function(e){
+            pic.attr("src",this.result);
+        }
+    }
+</script>

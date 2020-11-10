@@ -19,6 +19,7 @@ import spring.aoyo_hou.utils.AliyunOSSUtil;
 import javax.servlet.http.HttpSession;
 import java.io.File;
 import java.io.IOException;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -166,6 +167,39 @@ public class MerchantController {
         int i = merchantService.merchantFuWuXiuGaiById(feature);
         return i;
     }
+
+
+
+    /*
+    *
+    * 套餐类型
+    *
+    * */
+
+
+    //*特色服务列表*//*
+    @RequestMapping("merchantTaoCan")
+    @ResponseBody
+    public List<AoyoGroupFeaturedServices> merchantTaoCan() throws ParseException {
+        List<AoyoGroupFeaturedServices> list = merchantService.merchantTaoCan();
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        String s = sdf.format(new Date());
+        Date date =  sdf.parse(s);
+        System.out.println(list);
+        return list;
+    }
+
+
+    //*特色服务修改*//*
+    @RequestMapping("merchantTaoCanbyId")
+    @ResponseBody
+    public BaseResponse merchantTaoCanbyId( AoyoGroupFeaturedServices featuredServices, HttpServletRequest request) throws ParseException {
+        int i  = merchantService.merchantTaoCanbyId(featuredServices);
+        System.out.println(featuredServices);
+        return new BaseResponse(200,"success0",featuredServices) ;
+    }
+
+
 
 }
 

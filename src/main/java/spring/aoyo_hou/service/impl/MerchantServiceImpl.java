@@ -67,5 +67,15 @@ public class MerchantServiceImpl implements MerchantService {
         return merchantMapper.merchantFuWuXiuGaiById( feature);
     }
 
+    @Override
+    public List<AoyoGroupFeaturedServices> merchantTaoCan() {
+        return merchantMapper.merchantTaoCan();
+    }
+
+    @Override
+    public int merchantTaoCanbyId(AoyoGroupFeaturedServices featuredServices) {
+           return merchantMapper.merchantTaoCanbyId(featuredServices);
+    }
+
 
 }

@@ -1,8 +1,7 @@
 package spring.aoyo_hou.service;
 
 
-import spring.aoyo_hou.pojo.AoyoCommodityImg;
-import spring.aoyo_hou.pojo.AoyoGroupFeaturedServices;
+import spring.aoyo_hou.pojo.*;
 
 import java.util.List;
 
@@ -31,4 +30,25 @@ public interface ImgService {
     AoyoGroupFeaturedServices huixiantype(Integer featuredServicesId);
 
     int Updataimagetype(AoyoGroupFeaturedServices type11);
+
+
+
+    /*
+    *
+    * app分类列表 
+    *
+    * */
+
+
+    List<AoyoAppClass> appFenLei();
+
+    int appFenLeibyId(AoyoAppClass appClass);
+
+    List<AoyoCommodityBrand> appBrand();
+
+    int appBrandbyId(AoyoCommodityBrand commodityBrand);
+
+    List<AoyoAppClass> appcommodity();
+
+    int UpdataAppCommodity(AoyoAppClass appClass);
 }

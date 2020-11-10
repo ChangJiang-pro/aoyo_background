@@ -1,7 +1,11 @@
 package spring.aoyo_hou.pojo;
 
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
+import org.springframework.format.annotation.DateTimeFormat;
+
+import java.util.Date;
 
 @Data
 public class AoyoGroupFeaturedServices {
@@ -12,9 +16,13 @@ public class AoyoGroupFeaturedServices {
   private String featuredServicesRemarks;
   private Integer featuredServicesIsenable;
   private Integer deleteFlag;
-  private java.sql.Timestamp createTime;
+  @DateTimeFormat(pattern = "yyyy-MM-dd")
+  @JsonFormat(pattern = "yyyy-MM-dd")
+  private Date createTime;
   private String functionButtonUrl;
   private String jumpPath;
+  private String packageType;
+
 
 
  

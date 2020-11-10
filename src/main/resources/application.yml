@@ -4,11 +4,6 @@ spring:
     view:
       suffix: .jsp
       prefix: /jsps/
-
-    #开启热部署
-    devtools:
-      restart:
-        enabled: true
     resources:
       static-locations: classpath:/META-INF/resources/,classpath:/resources/,classpath:/static/,classpath:/public/,file:${web.upload-path}
   devtools:
@@ -18,7 +13,7 @@ spring:
     driver-class-name: com.mysql.jdbc.Driver
     username: root
     password: admin123
-    url: jdbc:mysql://114.55.92.94:3306/aoyou?autoReconnect=true&useSSL=false&characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull&serverTimezone=Asia/Shanghai
+    url: jdbc:mysql://114.55.92.94:3306/aoyou?autoReconnect=true&useSSL=false&characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull&serverTimezone=Asia/Shanghai&allowMultiQueries=true
   redis:
     host: localhost
     port: 6379

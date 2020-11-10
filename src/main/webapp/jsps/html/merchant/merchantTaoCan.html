@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <title>套餐类型</title>
+    <link rel="stylesheet" href="/layui/css/layui.css" media="all">
+</head>
+<body>
+<table id="coupon_tab" lay-filter="test"></table>
+<!--模态框-->
+<div style="display:none" id="update">
+    <form id="coupon_form" class="layui-form" action="" lay-filter="coupon_form">
+
+        <div class="layui-input-inline">
+            <input type="hidden" id="featuredServicesId" name="featuredServicesId" >
+        </div>
+
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label class="layui-form-label">套餐名称</label>
+                <div class="layui-input-inline">
+                    <input type="tel" id="functionButtonName" name="functionButtonName" lay-verify="title" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-inline">
+                <label class="layui-form-label">套餐类型</label>
+                <div class="layui-input-inline">
+                    <input type="text" id="packageType" name="packageType" lay-verify="title" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label class="layui-form-label">创建时间</label>
+                <div class="layui-input-inline">
+                    <input type="text" name="createTime" id="createTime" lay-verify="date" placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+
+            <div class="layui-inline">
+                <label class="layui-form-label">状态</label>
+                <div class="layui-input-inline">
+                    <select  name="featuredServicesIsenable" id="featuredServicesIsenable" lay-verify="required">>
+                        <option value="1"></option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <div class="layui-input-block" id="yichang">
+                <button type="button" class="layui-btn layui-btn-primary">取消</button>
+                <button type="button" class="layui-btn" id="btn"  lay-submit="" lay-filter="demo1">确定</button>
+            </div>
+        </div>
+    </form>
+</div>
+<!--模态框结束-->
+<script type="text/html" id="operation">
+    <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="detail">查看</a>
+    <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+</script>
+
+
+<script src="/layui/layui.js"></script>
+<script src="/js/jquery-3.4.1.min.js"></script>
+<script>
+    // 关闭弹出框
+    function closeModel(){
+        layer.closeAll();
+    }
+    layui.use(['table','form','laydate'], function(){
+        var table = layui.table;
+        var form=layui.form;
+        var laydate=layui.laydate;
+        //日期
+        laydate.render({
+            elem: '#couponStartTime'
+            ,format: 'yyyy-MM-dd'
+            ,trigger: 'click'
+        });
+        laydate.render({
+            elem: '#couponEndTime'
+            ,format: 'yyyy-MM-dd'
+            ,trigger: 'click'
+        });
+        //加载表格
+        table.render({
+            elem: '#coupon_tab'
+            ,height: 312
+            ,id: 'coupon_id'
+            ,url: '/merchant/merchantTaoCan' //数据接口
+            ,page: true //开启分页
+            ,parseData : function (res) {
+                return{
+                    "code":0,
+                    "msg":"",
+                    count:100,
+                    data:res,
+                }
+            }
+            ,cols: [[ //表头
+                {field: 'featuredServicesId', title: '序号', width:80, fixed: 'left',sort:true}
+                ,{field: 'functionButtonName', title: '套餐名称', width:120}
+                ,{field: 'packageType', title: '套餐类型', width:80}//sort:true
+                ,{field: 'createTime', title: '创建时间', width:140}
+                ,{title: '操作', width: 200 ,toolbar: '#operation'}
+            ]]
+
+        });
+        var url;
+        // 操作表
+        table.on('tool(test)', function(obj){ //注：tool 是工具条事件名，test 是 table 原始容器的属性 lay-filter="对应的值"
+            var data = obj.data; //获得当前行数据
+            var layEvent = obj.event; //获得 lay-event 对应的值（也可以是表头的 event 参数对应的值）
+            var tr = obj.tr; //获得当前行 tr 的 DOM 对象（如果有的话）
+            if(layEvent === 'detail'){ //查看
+                layer.open({
+                    type: 1,
+                    area: ['800px', '600px'],
+                    shadeClose: true, //点击遮罩关闭
+                    content: $("#update"),
+                    success:function () {
+                        form.val("coupon_form",data);
+                        $("#coupon_form input").attr("style","border:none");
+                        $("#btn_div").hide();
+                        $("#yichang").hide();
+                        var dom=$("#featuredServicesIsenable")
+                        var html='<option value="1"></option>'
+                        html+='<option value="1" selected>开启</option>'
+                        dom.html(html);
+                        form.render("select");
+                    }
+                });
+            } else if(layEvent === 'del'){ //删除
+                layer.confirm('真的删除行么', function(index){
+                    obj.del(); //删除对应行（tr）的DOM结构，并更新缓存
+                    layer.close(index);
+                    //向服务端发送删除指令
+                    var id=data.couponId;
+                    $.ajax({
+                        url:"/market/delCoupon",
+                        data:{id:id},
+                        type:"post",
+                        dataType:"json",
+                        success:function(data){
+                            location.reload();
+                        }
+                    })
+                });
+            } else if(layEvent === 'edit'){ //编辑
+                $("#yichang").show();
+                // 弹出
+                layer.open({
+                    type: 1,
+                    area: ['800px', '600px'],
+                    closeBtn: 0, //不显示关闭按钮
+                    shadeClose: true, //点击遮罩关闭
+                    content: $("#update"),
+                    success:function () {
+                        form.val("coupon_form",data);
+                        var dom=$("#featuredServicesIsenable")
+                        var html='<option value="1"></option>'
+                        html+='<option value="1" selected>开启</option>'
+                        dom.html(html);
+                        form.render("select");
+                    }
+                });
+            }
+            $("#btn").click(function() {
+                var formData = new FormData($("#coupon_form")[0]);
+                $.ajax({
+                    url: "/merchant/merchantTaoCanbyId",
+                    data: formData,
+                    type: "POST",
+                    processData: false,
+                    contentType: false,
+                    success: function (data) {
+                        alert("修改成功");
+                        window.location.reload();
+
+                    }, error: function () {
+                        alert("修改失败");
+                    }
+                })
+            })
+        });
+    });
+
+</script>
+</body>
+</html>
